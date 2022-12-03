@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<title>solar map</title>
+
+
+	<link rel="stylesheet" href="leaflet.css" />
+	<script src="leaflet.js"></script>
+    <script src="routes.json" type="text/javascript"></script>
+    <script src="villes.json" type="text/javascript"></script>
+    <script src="regions.json" type="text/javascript"></script>
+
+    <script src="GHI.json" type="text/javascript"></script>
+
+
+
+
+
+	<style>
+		#map {
+			width: 1400px;
+			height: 600px;
+		}
+		.my-label {
+              background: rgba(0, 0, 0, 0) !important;
+              border: none !important;
+              font-size: 11px; 
+              text-shadow: 1px 1px 1px whitesmoke;
+              box-shadow: none !important;
+        }
+        .leaflet-tooltip-top:before, 
+        .leaflet-tooltip-bottom:before, 
+        .leaflet-tooltip-left:before, 
+        .leaflet-tooltip-right:before {
+              border: none !important;
+        }
+        
+        
+        .leaflet-control-layers-toggle {
+       	  background-color: gray;
+        }
+        
+        .leaflet-control-layers-expanded {
+          color: whitesmoke;
+     	  background-color: gray;
+
+        }
+        .leaflet-popup-content-wrapper {
+          padding: 2px;
+          text-align: center;
+          background-color: gray; !important;
+          font-size: 10px;
+          color: whitesmoke;
+          opacity: 0.8;
+
+        }
+        .leaflet-popup-tip {
+          background-color: gray;
+          opacity: 0.8;
+        }
+            
+        .info {
+           padding: 6px 8px;
+           font: 14px/16px Arial, Helvetica, sans-serif;
+           background: white;
+           background: rgba(255,255,255,0.8);
+           box-shadow: 0 0 15px rgba(0,0,0,0.2);
+           border-radius: 5px;
+        }
+        .info h4 {
+           margin: 0 0 5px;
+           color: #777;
+        }
+        .legend {
+           line-height: 18px;
+           color: #555;
+        }
+        .legend i {
+           width: 18px;
+           height: 18px;
+           float: left;
+           margin-right: 8px;
+           opacity: 0.7;
+        }
+        
+
+        
+
+
+	</style>
+
+	
+</head>
+<body>
+
+<div id='map' ></div>
+
+
+<script>
+    
+    
+
+   
+// base layer: open street map
+    
+	var map = L.map('map').setView([29.141208, -9.402285], 5);
+
+
+
+
+	 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+     }).addTo(map);
+
+// style de carte choroplèthes
+     //pour GHI
+    function getColor(d) {
+     return d > 2140 ? '#ff0000' :
+            d > 2015  ? '#ffa600' :
+            d > 1931  ? '#ffff00' :
+            d > 1861  ? '#70ffd2' :
+            d > 1742   ? '#3b9dff' :
+            d > 1703   ? '#0808ff' :
+                         '#0808ff'; 
+                                
+    }
+
+    function style(feature) {
+      return {
+        fillColor: getColor(feature.properties.gridcode),
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        dashArray: '1',
+        fillOpacity: 0.9
+      };
+    }
+
+    function highlightFeature(e) {
+       var layer = e.target;
+
+       layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+       });
+
+       
+       info.update(layer.feature.properties);
+       
+    }
+
+    function resetHighlight(e) {
+       GHI_Ma.resetStyle(e.target);
+       info.update();
+       
+    }
+
+
+    function zoomToFeature(e) {
+       map.fitBounds(e.target.getBounds());
+    }
+
+    function legend(feature, layer) {
+        layer.on({
+          mouseover: highlightFeature,
+          mouseout: resetHighlight,
+          click: zoomToFeature
+        });
+        
+    }
+
+
+
+// Ajout de PV
+    
+    var GHI_Ma = L.geoJSON(ghi, {
+         style : style,
+         onEachFeature: legend
+    }).addTo(map);
+    
+	
+     
+
+// style des routes
+    
+	var sroutes = {
+            color: "#17B4CA",
+            weight: 1,
+            opacity: 0.6
+    };
+	var routes = L.geoJSON(mesroutes, {  
+		style : sroutes		
+	});
+
+
+// style des villes
+
+    var svilles = {
+         radius: 2,
+         fillColor: 'black',
+         color: 'white',
+         weight: 1,
+         opacity: 0.7,
+         fillOpacity: 1
+    };
+    
+    
+	var villes = L.geoJSON(villesma, {
+		
+		pointToLayer: function (feature, latlng) {
+                              return L.circleMarker(latlng, svilles)
+                              .bindTooltip(feature.properties.NOM,{direction: "center", permanent: true, className: "my-label", offset: [10,10], opacity: 1});
+        }
+	});
+
+    
+    
+    
+
+	
+
+    var overlayMaps = {
+        "Routes": routes,
+        "Villes": villes,
+        "GHI": GHI_Ma,
+
+    };
+	
+
+
+    var layerControll = L.control.layers(null, overlayMaps, { position: 'bottomleft' }).addTo(map);
+    map.on('zoomend', function(e){
+        var zoomLevel = map.getZoom();
+        if (zoomLevel < 6 ){
+             [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (el) {
+              el.style.visibility = 'hidden';
+
+             });
+        }else{
+             [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (el) {
+              el.style.visibility = 'visible';
+
+             });
+        }
+    });
+
+    var info = L.control();
+
+    info.onAdd = function (map) {
+       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+       this.update();
+       return this._div;
+    };
+
+// method that we will use to update the control based on feature properties passed
+    info.update = function (props) {
+       this._div.innerHTML = '<h4>Global horizontal irradiation</h4>' +  (props ?
+        '<b>' + props.Nom_Region + '</b><br />' + props.gridcode + ' kWh / m <sup>2 </sup>' + '/an'
+        : 'Déplacez le curseur vers une région');
+    };
+    
+    info.addTo(map);
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+
+      var div = L.DomUtil.create('div', 'info legend'),
+        grades = [1703, 1742, 1861, 1931, 2015, 2140],
+        labels = [];
+
+    
+      for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> '+
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      }
+ 
+      return div;
+    };
+
+    legend.addTo(map);
+
+
+</script>
+
+
+
+</body>
+</html>

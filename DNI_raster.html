@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Géoportail Solaire</title>
+    <link rel="icon" type="image/jpg" href="logosolaire.jpg" />
+    
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+
+	<link rel="stylesheet" href="leaflet.css" />
+	<script src="leaflet.js"></script>
+    <script src="routes.json" type="text/javascript"></script>
+    <script src="villes.json" type="text/javascript"></script>
+    
+  <head>
+	
+
+    
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+
+
+
+
+	<style>
+		#map {
+      margin: 50px 1px 5px;
+			width: 1200px;
+			height: 550px;
+		}
+		.my-label {
+              background: rgba(0, 0, 0, 0) !important;
+              border: none !important;
+              font-size: 11px; 
+              text-shadow: 1px 1px 1px whitesmoke;
+              box-shadow: none !important;
+        }
+        .leaflet-tooltip-top:before, 
+        .leaflet-tooltip-bottom:before, 
+        .leaflet-tooltip-left:before, 
+        .leaflet-tooltip-right:before {
+              border: none !important;
+        }
+        
+        
+        .leaflet-control-layers-toggle {
+       	  background-color: gray;
+        }
+        
+        .leaflet-control-layers-expanded {
+          color: whitesmoke;
+     	  background-color: gray;
+
+        }
+        .leaflet-popup-content-wrapper {
+          padding: 2px;
+          text-align: center;
+          background-color: gray; !important;
+          font-size: 10px;
+          color: whitesmoke;
+          opacity: 0.8;
+
+        }
+        .leaflet-popup-tip {
+          background-color: gray;
+          opacity: 0.8;
+        }
+            
+        .info {
+           padding: 6px 8px;
+           font: 14px/16px Arial, Helvetica, sans-serif;
+           background: white;
+           background: rgba(255,255,255,0.8);
+           box-shadow: 0 0 15px rgba(0,0,0,0.2);
+           border-radius: 5px;
+        }
+        .info h4 {
+           margin: 0 0 5px;
+           color: #777;
+        }
+        .legend {
+           line-height: 18px;
+           color: #555;
+        }
+        .legend i {
+           width: 18px;
+           height: 18px;
+           float: left;
+           margin-right: 8px;
+           opacity: 0.7;
+        }
+        
+
+        
+
+
+	</style>
+</head>
+<body>
+  <!--header-->
+  <header class="main-header clearfix" role="header">
+    <div class="logo" >
+      <a href="#"><em>Solar</em>Engine</a>
+    </div>
+    <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+    <nav id="menu" class="main-nav" role="navigation">
+      <ul class="main-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li class="has-submenu"><a href="#section2">A Propos</a>
+          <ul class="sub-menu">
+            
+            <li><a href="#section4">Qui Sommes-Nous? </a></li>
+            <li><a href="#section6">Contactez-Nous</a></li>
+            
+          </ul>
+        
+         
+        </li>
+
+        <li class="has-submenu"><a href="#section2">Cartes</a>
+          <ul class="sub-menu">
+            <li><a href="PV.html" rel="sponsored" class="external">PV</a></li>
+            <li><a href="GHI.html" rel="sponsored" class="external">GHI</a></li>
+            <li><a href="DNI.html" rel="sponsored" class="external">DNI</a></li>
+            <li><a href="DIF.html" rel="sponsored" class="external">DIF</a></li>
+
+          </ul>
+        </li>
+        <li class="has-submenu"><a href="#section2">Requêtes</a>
+          <ul class="sub-menu">
+            <li><a href="PV_req.html"sponsored" class="external">PV</a></li>
+            <li><a href="GHI_req.html" rel="sponsored" class="external">GHI</a></li>
+            <li><a href="DNI_req.html" rel="sponsored" class="external">DNI</a></li>
+          </ul>
+        </li>
+       
+        
+      
+      
+        <li class="has-submenu"><a href="#section2">Raster</a>
+          <ul class="sub-menu">
+            <li><a href="PV_raster.html" rel="sponsored" class="external">PV</a></li>
+            <li><a href="GHI_raster.html" rel="sponsored" class="external">GHI</a></li>
+            <li><a href="DNI_raster.html" rel="sponsored" class="external">DNI</a></li>
+            <li><a href="DIF_raster.html" rel="sponsored" class="external">DIF</a></li>
+      </ul>
+    </nav>
+  </header>
+  </html>
+	
+
+   
+
+<section class="section contact" data-section="section6">
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <div class="section-heading">
+      <h2>Indice DNI</h2>
+    </div>
+  </div>
+  <div class="col-md-6">
+      <!DOCTYPE html>
+<html lang="en">
+
+</head>
+<body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+
+
+<!-- Bootstrap -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+<!-- Icons -->
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<!-- Fonts -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+<!-- Custom styles -->
+<link rel="stylesheet" href="assets1/css/styles.css">
+
+<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+<link rel="stylesheet" href="css1/leaflet.css" />
+<script src="assets1/js/leaflet.js"></script>
+<script src="assets1/js/jquery-3.6.0.js"></script>
+<script src="assets1/js/leaflet-timeline-slider.js"></script>
+
+</head>
+<body class="home">
+<div id='map' ></div>
+<script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+<script src="https://unpkg.com/chroma-js"></script>
+
+
+<script>
+    
+    
+
+   
+// base layer: open street map
+    
+	var map = L.map('map').setView([29.141208, -9.402285], 5);
+
+
+
+
+	 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+     }).addTo(map);
+
+// style de cartes choroplèthes
+     //pour DNI
+    
+
+     
+
+// style des routes
+    
+	var sroutes = {
+            color: "#17B4CA",
+            weight: 1,
+            opacity: 0.6
+    };
+	var routes = L.geoJSON(mesroutes, {  
+		style : sroutes		
+	});
+
+
+// style des villes
+
+    var svilles = {
+         radius: 2,
+         fillColor: 'black',
+         color: 'white',
+         weight: 1,
+         opacity: 0.7,
+         fillOpacity: 1
+    };
+    
+    
+	var villes = L.geoJSON(villesma, {
+		
+		pointToLayer: function (feature, latlng) {
+                              return L.circleMarker(latlng, svilles)
+                              .bindTooltip(feature.properties.NOM,{direction: "center", permanent: true, className: "my-label", offset: [10,10], opacity: 1});
+        }
+	});
+
+    
+    
+    
+
+	
+
+    var overlayMaps = {
+        "Routes": routes,
+        "Villes": villes,
+       
+
+    };
+	
+
+
+    var layerControll = L.control.layers(null, overlayMaps, { position: 'bottomleft',collapsed: false }).addTo(map);
+    map.on('zoomend', function(e){
+        var zoomLevel = map.getZoom();
+        if (zoomLevel < 6 ){
+             [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (el) {
+              el.style.visibility = 'hidden';
+
+             });
+        }else{
+             [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (el) {
+              el.style.visibility = 'visible';
+
+             });
+        }
+    });
+
+    L.Control.Watermark = L.Control.extend({
+      onAdd: function(map) {
+        var img = L.DomUtil.create('img');
+
+        img.src = 'DNI_leg.png';
+        img.style.width = '80px';
+        img.style.opacity= 0.8;
+
+        return img;
+      },
+
+      onRemove: function(map) {
+        // Nothing to do here
+      }
+    });
+
+    L.control.watermark = function(opts) {
+      return new L.Control.Watermark(opts);
+    }
+
+    L.control.watermark({ position: 'bottomright' }).addTo(map); 
+
+    
+
+
+
+    
+    
+
+    var url_to_geotiff_file = "https://lkawtar.github.io/webmapping/DNI.tif";
+
+      fetch(url_to_geotiff_file)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
+
+            // available color scales can be found by running console.log(chroma.brewer);
+            console.log(chroma.brewer);
+            var scale = chroma.scale(['#0c2f7a' ,'#18778c', '#1ade00','#fcf403' ,'#e38a1e','#cf6332', '#c2523c']).mode('lch');;
+
+            var layer = new GeoRasterLayer({
+                georaster: georaster,
+                opacity: 0.7,
+                pixelValuesToColorFn: function(pixelValues) {
+                  var pixelValue = pixelValues[0]; // there's just one band in this raster
+
+                  // if there's zero wind, don't return a color
+                  if (pixelValue === 0) return null;
+
+                  // scale to 0 - 1 used by chroma
+                  var scaledPixelValue = (pixelValue - min) / range;
+
+                  var color = scale(scaledPixelValue).hex();
+
+                  return color;
+                },
+                resolution: 256
+            });
+            console.log("layer:", layer);
+            layer.addTo(map);
+
+            map.fitBounds(layer.getBounds());
+          });
+        });
+
+
+</script>
+
+
+
+</body>
+</html>
