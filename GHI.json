@@ -1,4 +1,4 @@
-var ghi= {
+var ghi = {
   "type" : "FeatureCollection",
   "crs" : {
     "type" : "name",
@@ -5416,7 +5416,7 @@ var ghi= {
         "Id" : 36,
         "gridcode" : 1860,
         "OBJECTID_1" : 36,
-        "Nom_Region" : "TANGER-TETOUAN-AL HOCEIMA",
+        "Nom_Region" : "RABAT-SALE-KENITRA",
         "Shape_Length" : 7.9954091053086627,
         "Shape_Area" : 1.7236869672671999
       }
@@ -7896,7 +7896,7 @@ var ghi= {
         "Id" : 40,
         "gridcode" : 1930,
         "OBJECTID_1" : 40,
-        "Nom_Region" : "TANGER-TETOUAN-AL HOCEIMA",
+        "Nom_Region" : "FES-MEKNES",
         "Shape_Length" : 13.191070563128068,
         "Shape_Area" : 3.7816016600249256
       }
@@ -9870,7 +9870,7 @@ var ghi= {
         "Id" : 43,
         "gridcode" : 1930,
         "OBJECTID_1" : 43,
-        "Nom_Region" : "RABAT-SALE-KENITRA",
+        "Nom_Region" : "CASABLANCA-SETTAT",
         "Shape_Length" : 7.7674018760897656,
         "Shape_Area" : 1.9584819640719175
       }
@@ -13334,7 +13334,7 @@ var ghi= {
         "Id" : 45,
         "gridcode" : 1986,
         "OBJECTID_1" : 45,
-        "Nom_Region" : "TANGER-TETOUAN-AL HOCEIMA",
+        "Nom_Region" : "L'ORIENTAL",
         "Shape_Length" : 17.966517402672672,
         "Shape_Area" : 6.4154028717031579
       }
@@ -15062,7 +15062,7 @@ var ghi= {
         "Id" : 47,
         "gridcode" : 1970,
         "OBJECTID_1" : 47,
-        "Nom_Region" : "FES-MEKNES",
+        "Nom_Region" : "Beni MELLAL-KHENIFRA",
         "Shape_Length" : 9.0669442326044472,
         "Shape_Area" : 2.6524313275515214
       }
@@ -17186,7 +17186,7 @@ var ghi= {
         "Id" : 49,
         "gridcode" : 2014,
         "OBJECTID_1" : 49,
-        "Nom_Region" : "BENI MELLAL-KHENIFRA",
+        "Nom_Region" : "MARRAKECH-SAFI",
         "Shape_Length" : 10.3955319123113,
         "Shape_Area" : 3.7093918887641761
       }
@@ -19974,7 +19974,7 @@ var ghi= {
         "Id" : 53,
         "gridcode" : 2121,
         "OBJECTID_1" : 53,
-        "Nom_Region" : "ORIENTAL-RIF",
+        "Nom_Region" : "DRAA Tafilalet",
         "Shape_Length" : 17.860519329836631,
         "Shape_Area" : 8.1363462078584572
       }
@@ -22556,7 +22556,7 @@ var ghi= {
         "Id" : 58,
         "gridcode" : 2139,
         "OBJECTID_1" : 58,
-        "Nom_Region" : "MARRAKECH-SAFI",
+        "Nom_Region" : "SOUSS-MASSA",
         "Shape_Length" : 14.859820909432498,
         "Shape_Area" : 5.0105332991123177
       }
@@ -23922,7 +23922,7 @@ var ghi= {
         "Id" : 59,
         "gridcode" : 2125,
         "OBJECTID_1" : 59,
-        "Nom_Region" : "SOUSS-MASSA",
+        "Nom_Region" : "GUELMIM-OUED NOUN",
         "Shape_Length" : 10.432791873805941,
         "Shape_Area" : 4.1078195558981374
       }
@@ -25424,7 +25424,7 @@ var ghi= {
         "Id" : 60,
         "gridcode" : 2203,
         "OBJECTID_1" : 60,
-        "Nom_Region" : "GUELMIM-OUED NOUN",
+        "Nom_Region" : "LAAYOUNE-BOUJDOUR-SAKIA El HAMRA",
         "Shape_Length" : 18.097789632277255,
         "Shape_Area" : 12.970539140960701
       }
@@ -27286,7 +27286,7 @@ var ghi= {
         "Id" : 61,
         "gridcode" : 2244,
         "OBJECTID_1" : 61,
-        "Nom_Region" : "LAAYOUNE-BOUJDOUR-SAKIA AL HAMRA",
+        "Nom_Region" : "DAKHLA OUED ED-DAHAB",
         "Shape_Length" : 17.809619512440072,
         "Shape_Area" : 11.375519107217642
       }
